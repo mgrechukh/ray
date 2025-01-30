@@ -95,7 +95,7 @@ def main(data_size_gb: int, num_epochs=2, num_workers=1):
         train_loop_config={"batch_size": 64, "num_epochs": num_epochs},
         datasets={"train": dataset},
         preprocessor=preprocessor,
-        scaling_config=ScalingConfig(num_workers=num_workers, use_gpu=True),
+        scaling_config=ScalingConfig(num_workers=num_workers, resources_per_worker={"GPU": 1}, use_gpu=True),
     )
     trainer.fit()
 
