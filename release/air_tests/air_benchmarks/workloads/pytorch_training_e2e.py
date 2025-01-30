@@ -48,7 +48,7 @@ def train_loop_per_worker(config):
     for epoch in range(config["num_epochs"]):
         running_loss = 0.0
         for i, data in enumerate(
-            train_dataset_shard.iter_torch_batches(batch_size=config["batch_size"])
+            train_dataset_shard.iter_torch_batches(batch_size=config["batch_size"], device=ray.train.torch.get_device())
         ):
             # get the inputs; data is a list of [inputs, labels]
             inputs = data["image"].to(device="cuda")
